@@ -102,13 +102,13 @@ public class ClienteFTPBasico extends JFrame
 		JScrollPane barraDesplazamiento = new JScrollPane(listaDirec);
 		barraDesplazamiento.setPreferredSize(new Dimension(335, 420));
 		barraDesplazamiento.setBounds(new Rectangle(5, 65, 335, 420));
-		JPanel panelBotones = new JPanel(new GridLayout(2, 4, 5, 5));
+		JPanel panelBotones = new JPanel(new GridLayout(3, 4, 5, 5));
 		c.add(barraDesplazamiento);
-		c.add(txtServidor);
+		panelBotones.add(txtServidor);
 		c.add(txtUsuario);
-		c.add(txtDirectorioRaiz);
-		c.add(txtArbolDirectoriosConstruido);
-		c.add(txtActualizarArbol);
+		panelBotones.add(txtDirectorioRaiz);
+		panelBotones.add(txtArbolDirectoriosConstruido);
+		panelBotones.add(txtActualizarArbol);
 		panelBotones.add(botonCargar);
 		panelBotones.add(botonDescargar);
 		panelBotones.add(botonBorrar);
