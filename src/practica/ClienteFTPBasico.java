@@ -122,7 +122,7 @@ public class ClienteFTPBasico extends JFrame
 		//se añaden el resto de los campos de pantalla
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new FlowLayout());
-		setSize(800, 570);
+		setSize(1150, 570);
 		setVisible(true);
 		//Acciones al pulsar en la lista o en los botones
 		listaDirec.addListSelectionListener(new ListSelectionListener()
