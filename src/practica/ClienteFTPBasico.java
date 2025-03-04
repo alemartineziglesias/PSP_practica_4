@@ -5,6 +5,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,6 +24,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
@@ -98,27 +100,29 @@ public class ClienteFTPBasico extends JFrame
 		listaDirec.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		//barra de desplazamiento para la lista
 		JScrollPane barraDesplazamiento = new JScrollPane(listaDirec);
-		barraDesplazamiento.setPreferredSize(new Dimension(335,420));
-		barraDesplazamiento.setBounds(new Rectangle(5,65,335,420));
+		barraDesplazamiento.setPreferredSize(new Dimension(335, 420));
+		barraDesplazamiento.setBounds(new Rectangle(5, 65, 335, 420));
+		JPanel panelBotones = new JPanel(new GridLayout(2, 4, 5, 5));
 		c.add(barraDesplazamiento);
 		c.add(txtServidor);
 		c.add(txtUsuario);
 		c.add(txtDirectorioRaiz);
 		c.add(txtArbolDirectoriosConstruido);
 		c.add(txtActualizarArbol);
-		c.add(botonCargar);
-		c.add(botonCreaDir);
-		c.add(botonDelDir);
-		c.add(botonRenombrar);
-		c.add(botonDescargar);
-		c.add(botonBorrar);
-		c.add(botonRenDir);
-		c.add(botonSalir);
-		c.setLayout(null);
+		panelBotones.add(botonCargar);
+		panelBotones.add(botonDescargar);
+		panelBotones.add(botonBorrar);
+		panelBotones.add(botonRenDir);
+		panelBotones.add(botonCreaDir);
+		panelBotones.add(botonDelDir);
+		panelBotones.add(botonRenombrar);
+		panelBotones.add(botonSalir);
+		c.add(panelBotones);
+		c.setLayout(new GridLayout(2, 1));
 		//se añaden el resto de los campos de pantalla
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new FlowLayout());
-		setSize(510, 600);
+		setSize(800, 570);
 		setVisible(true);
 		//Acciones al pulsar en la lista o en los botones
 		listaDirec.addListSelectionListener(new ListSelectionListener()
@@ -126,7 +130,6 @@ public class ClienteFTPBasico extends JFrame
 			@Override
 			public void valueChanged(ListSelectionEvent lse)
 			{
-				// TODO Auto-generated method stub
 				String fic = "";
 				if (lse.getValueIsAdjusting()) 
 				{
@@ -234,7 +237,9 @@ public class ClienteFTPBasico extends JFrame
 							llenarLista(ff2, direcSelec);
 						}
 						else
+						{
 							JOptionPane.showMessageDialog(null, nombreCarpeta.trim() + " => No se ha podido crear ...");
+						}	
 					}
 					catch (IOException e1)
 					{
@@ -519,7 +524,9 @@ public class ClienteFTPBasico extends JFrame
 			ok = true;
 		}
 		else
+		{
 			txtArbolDirectoriosConstruido.setText("No se ha podido subir... " + soloNombre);
+		}	
 		return ok;
 	}// final de SubirFichero
 	private void DescargarFichero(String NombreCompleto, String nombreFichero) 
@@ -545,9 +552,13 @@ public class ClienteFTPBasico extends JFrame
 				cliente.setFileType(FTP.BINARY_FILE_TYPE);
 				BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(archivoyCarpetaDestino));
 				if (cliente.retrieveFile(NombreCompleto, out))
+				{
 					JOptionPane.showMessageDialog(null,	nombreFichero + " => Se ha descargado correctamente ...");
+				}
 				else
+				{
 					JOptionPane.showMessageDialog(null,	nombreFichero + " => No se ha podido descargar ...");
+				}	
 				out.close();
 			}
 			catch (IOException e1)
